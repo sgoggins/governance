@@ -1,130 +1,250 @@
 # Ideas for Google Summer of Code projects
 
-## Idea 1: Visualizing  CHAOSS Metrics in Kibana Dashboards
+Interested in working with CHAOSS? Below are some project ideas. We describe how to apply to work with CHAOSS and how we select students on a different page: https://github.com/chaoss/governance/blob/master/GSoC-interest.md
 
-[ Micro-tasks and place for questions ](#)
+----
 
-[GrimoireLab](https://chaoss.github.io/grimoirelab/) provides a framework for retrieving information from several data sources and store that information in a set of ElasticSearch indexes. From those indexes it is relatively easy start building Kibana Dashboards. Behind the scenes, data is stored in, at least, two stages. The first one consist of retrieving data from the original source and storing them in ElasticSearch in RAW format, i.e., a format close to the original source format, without applying any transformation. In a second stage RAW data is enriched to generate new data more suitable for computing metrics, with Kibana in mind.
+## Idea: Advancing Risk Prediction With Machine Learning in Augur
 
-This project idea is about implementing some [CHAOSS metrics and use cases](https://github.com/chaoss/wg-gmd) by means of Kibana dashboards, on top of the data provided by GrimoireLab. These dashboards are based on ElasticSearch indexes. Some metrics could require using enriched indexes generated with GrimoireLab, while others could also require generating new enriched indexes more focused on a particular goal. This opens the door to participate in the active development of GrimoireLab-ELK project to add new enrichers. (GrimoireLab-Sigils)[https://github.com/chaoss/grimoirelab-sigils] project contains Kibana dashboards built on top of GrimoireLab data and currently includes a collection of panels related to CHAOSS metrics, so all dashboards built on top of GrimoireLab data could be also conributed in GrimoireLab-Sigils.
+[Micro-tasks and place for questions]( https://github.com/chaoss/augur/issues/1179 )
 
-The aims of the project are as follows:
+Currently Augur uses computational linguistics, dependency mapping, license scanning, topic modeling, social network analysis, and algorithms that target temporal changes in CHAOSS metrics. The aim of this project is to leverage and advance existing algorithms to make predictions and identify projects in large ecosystems that are at risk earlier. Our theory, for example, is that community decline or the increase in hostile communications is preceded by a decline in empathy, and changes in engagement level. This project will test those theories by directing Augur’s already rich set of AI tools to bear on this specific problem.  The goal of this project is to proactively identify at-risk open source communities:
 
-  * Acquiring knowledge on GrimoireLab toolchain to generate enriched data from different data sources.
-  * Creating Kibana dashboards to obtain visual representations of different kind of metrics based on GrimoireLab data. Painless scripting language may be needed for particular tasks.
-  * Writing Python code to query GrimoireLab ElasticSearch databases and obtain from it new enriched data relevant for computing metrics defined by CHAOSS community. Possible technologies to achieve this aim include Python Pandas.
-
-The aims will require working with ElasticSearch and Kibana, Python programming (could be needed to prepare the data for ElasticSearch indexes and Kibana visualizations), interaction with other people in the working group to learn about subtle details of the metrics, and producing documentation.
-
-  * _Difficulty:_ Medium
-  * _Requirements:_ Python programming. Interest in software analytics. Willingness to understand GrimoireLab internals and CHAOSS metrics.
-  * _Recommended:_ Experience with Python interfaces to databases would be convenient, but can be learned during the project. Experience in data analytics with Pandas, ElasticSearch, Kibana and Python Jupyter Notebooks will be a plus.
-  * _Mentors:_ Alberto Pérez García-Plaza and Miguel Ángel Fernández.
-
-## Idea 2: Implementing CHAOSS metrics with Perceval
-
-[Micro-tasks and place for questions](https://github.com/chaoss/wg-gmd/issues/81)
-
-The [GMD Working group](https://github.com/chaoss/wg-gmd) is proposing some metrics
-that are computed with information obtained from software development repositories.
-One of the goals of the working group is to provide reference implementations of
-those metrics, based on the output produced by [Perceval](https://github.com/chaoss/grimoirelab-perceval).
-As an example, still work in progress, check the Python notebook with the
-[reference implementation for commits](https://github.com/chaoss/wg-gmd/blob/master/implementations/Code_Commits.ipynb).
-
-The aims of this idea are as follows:
-
-* Producing Python (Jupyter) notebooks with proposals for reference implementations
-for these metrics. The proposals will follow the usual acceptance mechanism of the working group
-(based on GitHub issues and pull requests). In general, all reference implementations will
-build on the output produced by Perceval for the relevant data source,
-and will explore the peculiarities of the metric and its implementation for that data source.
-
-* Document the notebooks as much as possible, so that any person trying to implement the metric
-can understand not only how to implement it, but also the details that should be taken into account.
-Documentation should also be suitable for people willing to dig deeper about the details of
-the metric, with the aim of understanding it (not necesarily implementing it).
-
-* When needed, propose changes to Perceval, and maybe other components in GrimoireLab,
-that allow for the implementation of the metric.
-
-* Participate in the acceptance process of the working group.
-
-The aims will require programming in Python, producing Python notebooks, interaction with other
-people in the working group to learn about subtle details of the metrics, and producing
-documentation.
-
-  * _Difficulty:_ Medium
-  * _Requirements:_ Python programming, experience with Python notebooks, skills for producing documentation.
-  * _Recommended:_ Experience in data analytics with Python, if possible involving the use of Pandas, will be a plus. 
-  * _Mentors:_ Jesus M. Gonzalez-Barahona and Valerio Cosentino.
-
-## Idea 3: Support of Source Code Related Metrics
-
-[ Micro-tasks and place for questions ](https://github.com/chaoss/grimoirelab/issues/182)
-
-Currently, GrimoireLab allows to produce analytics with data extracted from more than 30 tools related with contributing to Open Source development such as version control systems, issue trackers and forums. Despite the large set of metrics available in GrimoireLab, none of them relies on information extracted from source code, thus limiting the end-users to benefit of a wider spectrum of software development data.
-
-[Graal](https://github.com/Bitergia/graal) is a tool that allows to conduct customizable and incremental analysis of source code by leveraging on existing tools, and produce an output that conforms to the data that can be processed by GrimoireLab. Graal already offers analysis about code complexity, quality, dependencies, security and licensing, however currently it is not integrated with GrimoireLab.
-
-This idea is about adding support to GrimoireLab to produce source code related metrics using Graal.
+Pool the existing, six computational models for classifying repositories in open source ecosystems to provide a rich, and complete view of project categories and clusters within a define open source software ecosystem
+From the categories identified, projects most at risk will be identified using analysis of each of the six models, and trained with data from projects that are known to have contributed to projects earlier.
 
 The aims of the project are as follows:
-  * Understanding the GrimoireLab components (Perceval, ELK, Mordred and Sigils) and the corresponding tool-chain.
-  * Adapting ELK and Mordred to be able to execute Graal and process the data produced.
-  * Producing analytics with Graal data and including them in Sigils.
-  * Evaluating the implementation with projects of different sizes.
+  - Identify projects with similar styles and characteristics automatically.
+  - Recommend projects based on individual developer styles and skills.
+  - Increase awareness of open source project ecosystems, and their component projects.
 
-Other aims, such as enhancing Graal to support more analysis or improve existing ones are completely within scope.
+The aims will require working in a programming language to automate the task, use API to generate the graphs, and use some Graphic editor to prepare the pdf.
 
-The aims will require extending GrimoireLab functionality to integrate Graal.
+* _Difficulty:_ Medium
+* _Requirements:_ Python programming experience, or a strong interest.
+* _Recommended:_ Experience with accessing API's, writing SQL, and a strong interest in Machine Learning.
+* _Mentors:_ Sean Goggins, Andrew Brain, Vinod Ahuja
 
-  * _Difficulty:_ medium
-  * _Requirements:_ Python programming. Interest in software analytics. Willingness to understand GrimoireLab internals.
-  * _Recommended:_ Experience with ElasticSearch and Kibana would be convenient, but can be learned during the project.
-  * _Mentors:_ Jesus M. Gonzalez-Barahona, Valerio Cosentino
-  
-## Idea 5: Build CHAOSS Risk and Growth Maturity and Decline Metrics in Augur
 
-[ Micro-tasks and place for questions ](https://github.com/chaoss/wg-gmd/issues/82)
+## Idea: Build an expert system to provide recommendations to users in a user interface
 
-[Augur](http://www.augurlabs.io) is a fully functional prototyping web stack for CHAOSS metrics that leverages cutting edge web technologies including VUE, NodeJS and Python. It provides structured data mined from git repositories using a plugin architecture that incorporate other open source metrics projects like [Facade](http://facade-oss.org/) and [FOSSology](https://www.fossology.org/). 
+[Micro-tasks and place for questions](https://github.com/chaoss/grimoirelab/issues/414)
 
-In this GSoC project we plan to implement Risk metrics and other metrics within the Growth-Maturity-Decline [CHAOSS metrics and use cases](https://github.com/chaoss/wg-gmd) using Augur, focusing on what we have unearthed as the open source community manager use case. The aims of the project are to: 
-1. Construct core open source software metrics defined by CHAOSS and
-2. Assemble filtered, comparative collections of those metrics in ways that community managers want to consume. 
+The new version of SortingHat includes a basic recommender system. It guesses about what identities could be the same, or what identities work for which companies. This information might not be useful for the end user and it isn't available on the UI, thought. This project idea is about improving the recommender system to an expert system that provides useful recommendations to users.
 
-The technical components of the project include:
-  * Acquiring knowledge on Augur toolchain to generate metrics from available data sources.  
-  * Creating VUE visualizations and API's to support the enumerated metrics and metric collections. 
-  * Writing Python code to query Facade, Augur and other datasets. 
+[SortingHat](https://github.com/chaoss/grimoirelab-sortinghat) is the tool that
+we use to manage identities data in [GrimoireLab](https://chaoss.github.io/grimoirelab].
+As individuals in a project can have different identities - several usernames or email
+addresses - this tool allows to create unified profiles of them. Then, the platform
+will use this information to generate accurate results of the activity of these
+participants.
 
-Right now, based on Augur prototypes and follow up discussions so far, we have the following observations that will inform our work both the “Growth Maturity and Decline” working group and in Augur Development. Here are a few things we have learned from prototyping Augur with community managers. These features in Augur are particularly valued:
-1. Allowing comparisons with projects within a defined universe of of projects is essential
-2. Allow community managers to add and remove repositories that they monitor from their repertories periodically
-3. Downloadable graphics
-4. Downloadable data (.csv or .json)
-5. Availability of a “Metrics API”, limiting the amount of software infrastructure the community manager needs to maintain for themselves. This is more valued by program managers overseeing larger portfolios right now, but we think it has potential to grow as awareness of the relatively light weight of this approach becomes more apparent. By apparent, we really mean “easy to use and understand”; right now it is easy for a programmer, but less so for a community manager without this background or current interest.
+SortingHat started as a command line tool but after some years, we saw its potential
+and we decided to create a new version, this time as a service. This new version
+provides a new GraphQL API to operate with the server and a UI web-based app, that
+replaces Hatstall, the old UI for SortingHat.
 
-With these advantages in mind, making the most of this opportunity to help community managers with useful metrics is going to include the availability of date summarized comparison metrics. These types of metrics have two “filters” or “parameters” fed into them that are more abstractly defined in the Growth, Maturity, and Decline metrics on the CHAOSS project.
+Although the development of it is on its later stage and it will be ready soon for the
+stable version of the platform, there are many good ideas that we will like to
+incorporate. Some of them were selected for GSoC 2021.
 
-1. Given a pool of repositories of interest for a community manager, rank them in ascending or descending order by a metric
-2. Over a specified time period or
-3. Over a specified periodicity (e.g., month) for a length of time (e.g., year).
+The aims of the project are as follows:
+  - Identify useful recommendations for the end-user.
+  - Implement new recommendations.
+  - Integrate recommendations on the UI.
 
-For example, one open source program officer we talked with is interested in the following set of date summarized comparison metrics. Given a pool of repositories of interest to the program officer (dozens to hundreds of repositories):
-1. What ten repositories have the most commits this year (straight commits, and lines of code)?
-2. How many new projects were launched this year?
-3. What are the top ten new repositories in terms of commits this year (straight commits, and lines of code)?
-4. How many commits and lines of code were contributed by outside contributors this calendar year? Organizationally sponsored contributors?
-5. What organizations are the top five external contributors of commits, comments, and merges?
-6. What are the total number of repository watchers we have across all of our projects?
-7. Which repositories have the most stars? Of the ones new this year? Of all the projects? Which projects have the most new stars this year?
+The aims will require generating code in **Python** for **Django** and the **GraphQL API**, and for the web app (generated with **Vue.js** and **Vuetify**).
 
-Further elaboration on the community manager use case is available on the CHAOSS website: [Community Manager Metrics Use Case](https://chaoss.community/news/2018/11/16/metrics-with-greater-utility-the-community-manager-use-case/)
+* _Difficulty:_ Hard
+* _Requirements:_ Interest in software analytics. Python programming. JavaScript programming. SQL knowledge. Willingness to understand GrimoireLab internals.
+* _Recommended:_ Experience with Python, JavaScript, UI development, GraphQL, Django, and Vue.js would be convenient but can be learned during the project.
+* _Mentors:_ Santi Duenas, Eva Millán, Miguel Ángel Fernández
 
-  * _Difficulty:_ Medium
-  * _Requirements:_ Python programming. Interest in data analytics. Willingness to understand data structures and our web stack internals and CHAOSS metrics.
-  * _Recommended:_ Experience : NodeJS Programming. VUE Programming.
-  * _Mentors:_ Sean Goggins, Jesus M. Gonzalez-Barahona
+## Idea: Automatically identify Contributor Aliases (emails, platform user accounts) to Increase Parsimony of Statistics and Metrics With Privacy Enhancement
+
+[Micro-tasks and place for questions]( https://github.com/chaoss/augur/issues/1180 )
+
+This project will generalize, and make available through a PyPy distributable Python package the core functionality currently within the Augur contributor worker, and envisioned as the next phase of the Augur contributor worker. A worker is a data collection, machine learning, notification, or mapping daemon that can be managed by Augur for comprehensive data analysis, or installed independently.
+
+[Augur Contributor Worker](https://github.com/chaoss/augur) is the tool that reconciles identities in Augur, using information from Git Platforms, Git Logs, and voluntary mailing lists. The contributor worker is a tool that automatically scans all repository data collected by augur to resolve distinct individuals to all of the often 10 or more aliases they can be identified across different systems.
+
+The aims of the project are as follows:
+  - Construct an API Accessible Graph Database for identifying and mapping contributors who use multiple email addresses within a platform, and identifiers across platforms.
+  - Implement methods to manage this information.
+  - Integrate this information into clearer, more parsimonious CHAOSS metrics.
+  - Automate the management of contributor changes over time
+  - Enable analysis at the project level that obscures or anonymizes individual developer identity
+
+
+* _Difficulty:_ Medium
+* _Requirements:_ Interest in software analytics. Python programming. JavaScript programming. SQL knowledge.
+* _Recommended:_ Experience with Python
+* _Mentors:_ Sean Goggins, Andrew Brain, John McGinnis
+
+
+## Idea: Develop a Shared Data Resource Focused on Dependencies, Risk and Vulnerabilities in Open Source Software
+
+[Micro-tasks and place for questions]( https://github.com/chaoss/augur/issues/1181 )
+
+The aim of this work is to understand the code based dependencies embedded within a piece of open source software. This metric explicitly excludes infrastructure focused dependencies like databases, and operating systems, which are defined in the “upstream infrastructure dependencies” metric.
+
+**Objectives**
+ - This software project is aimed at understanding the language level, non-infrastructure packages, and other software which are required to run a piece of software in build, test, and runtime environments.
+ - What libraries or versions does my project explicitly depend on?
+ - What libraries or versions does my project implicitly depend on?
+ - Consolidate dependency information from the range of projects focused in this area.
+ - Provide a shared, open source software package for consolidating a subset of available resources (we don't expect one student to finish this entire project in a summer)
+ - Integrate this information on the CHAOSS Website
+
+**Implementation**
+The expectation is that this would be implemented by using existing tools that examine package manager data for the languages in use (e.g., package.json for JavaScript npm, pyproject.toml / requirements.txt for Python, Gemfile / Gemfile.lock for Ruby). Ergo, dependencies will be analyzed using the project’s dependency file.
+This will be analyzed using dependency file in the project.
+
+Note: C/C++ generally **do not** use system package managers. Things get more complex with multiple languages, insofar as several language specific dependency files will need to be scanned.
+
+Micro-tasks and place for questions https://github.com/chaoss/augur/issues/1181
+
+[Augur ](https://github.com/chaoss/augur) would be the tool that this is ultimately implemented in, although only as an accessed, shared data resources including informaiton form other tools, including:
+
+**Resource	Link**
+ - Scorecard	https://github.com/ossf/scorecard
+ - Dependency Check	https://owasp.org/www-project-dependency-check/
+ - Proactive Error Detection in Software	https://github.com/google/oss-fuzz
+ - High Severity Vulnerability Detection	https://github.com/google/tsunami-security-scanner
+ - Kubernetes focused supply chain security	https://github.com/grafeas/kritis
+ - Verification from source to binary	https://reproducible-builds.org/
+ - Dependency Check (Relies on Common Platform Enumeration (CPE)	https://owasp.org/www-project-dependency-check/
+ - Securing Critical Projects OSSF Working Group	https://docs.google.com/document/d/1MIXxadtWsaROpFcJnBtYnQPoyzTCIDhd0IGV8PIV0mQ/edit
+ - Preventing Supply Chain Attacks	https://www.linuxfoundation.org/en/blog/preventing-supply-chain-attacks-like-solarwinds/
+ - Security Threats OSSF Working Group
+ - Best Practices OSSF Working Group
+ - National Vulnerabilities Database	https://nvd.nist.gov/vuln/full-listing/2021/1
+ - 	https://nvd.nist.gov/vuln/data-feeds#JSON_FEED
+ - Libyears	https://github.com/nasirhjafri/libyear  &  https://github.com/sesh/piprot
+ - Census II	https://drive.google.com/file/d/1zyAdbftGhSUiddh1she3X_MDlKXDSIu5/view?usp=sharing
+ - 2021 State of Open Source Vulnerabilities	https://drive.google.com/file/d/1BwJD3eqynwSms5b9WxzzHrzp-YRXMbLv/view?usp=sharing
+
+
+* _Difficulty:_ Medium
+* _Requirements:_ Interest in software analytics. Python programming. JavaScript programming. SQL knowledge.
+* _Recommended:_ Experience with Python
+* _Mentors:_ Sean Goggins, CHAOSS Risk Working Group, Vinod Ahuja
+
+
+## Idea: Extend data model and user interface to capture better information about contributors
+
+[Micro-tasks and place for questions](https://github.com/chaoss/grimoirelab/issues/415)
+
+The information stored about Organizations is very basic. For each organization only
+its name and domains (e.g `example.com`) are stored. Organizations might have
+hierarchical structures composed by several groups, areas, and departments, where
+employees work for. We would like to be able to track all these information
+
+[SortingHat](https://github.com/chaoss/grimoirelab-sortinghat) is the tool that
+we use to manage identities data in [GrimoireLab](https://chaoss.github.io/grimoirelab].
+As individuals in a project can have different identities - several usernames or email
+addresses - this tool allows to create unified profiles of them. Then, the platform
+will use this information to generate accurate results of the activity of these
+participants.
+
+SortingHat started as a command line tool but after some years, we saw its potential
+and we decided to create a new version, this time as a service. This new version
+provides a new GraphQL API to operate with the server and a UI web-based app, that
+replaces Hatstall, the old UI for SortingHat.
+
+Although the development of it is on its later stage and it will be ready soon for the
+stable version of the platform, there are many good ideas that we will like to
+incorporate. Some of them were selected for GSoC 2021.
+
+The aims of the project are as follows:
+  - Define a data model to store an organization's internal structure.
+  - Implement methods to manage this information.
+  - Integrate this information on the UI
+  - (Extra stretch goal) Store organization aliases (e.g `Google` and `Google, LLC`).
+
+* _Difficulty:_ Hard
+* _Requirements:_ Interest in software analytics. Python programming. JavaScript programming. SQL knowledge. Willingness to understand GrimoireLab internals.
+* _Recommended:_ Experience with Python, JavaScript, UI development, GraphQL, Django, and Vue.js would be convenient but can be learned during the project.
+* _Mentors:_ Santi Duenas, Eva Millán, Miguel Ángel Fernández
+
+
+## Idea: Implement user roles/permissions and OpenID
+
+[Micro-tasks and place for questions](https://github.com/chaoss/grimoirelab/issues/416)
+
+Right now, SortingHat only supports one type of user: the admin user. We would like to
+have different roles, so basic users don't have all the rights to do evil things when
+using the service. Additionally, we want to integrate [OpenID](https://openid.net/)as
+a secure protocol for users to sign-in.
+
+[SortingHat](https://github.com/chaoss/grimoirelab-sortinghat) is the tool that
+we use to manage identities data in [GrimoireLab](https://chaoss.github.io/grimoirelab].
+As individuals in a project can have different identities - several usernames or email
+addresses - this tool allows to create unified profiles of them. Then, the platform
+will use this information to generate accurate results of the activity of these
+participants.
+
+SortingHat started as a command line tool but after some years, we saw its potential
+and we decided to create a new version, this time as a service. This new version
+provides a new GraphQL API to operate with the server and a UI web-based app, that
+replaces Hatstall, the old UI for SortingHat.
+
+Although the development of it is on its later stage and it will be ready soon for the
+stable version of the platform, there are many good ideas that we will like to
+incorporate. Some of them were selected for GSoC 2021.
+
+The aims will require working with:
+
+  - Identify and define roles for SortingHat.
+  - Implement permissions for the different kinds of roles.
+  - Add support for OpenID.
+  - (Extra stretch goal)  Roles and user management using the UI.
+
+* _Difficulty:_ Medium
+* _Requirements:_ Interest in software analytics. Python programming. JavaScript programming. SQL knowledge. Willingness to understand GrimoireLab internals.
+* _Recommended:_ Experience with Python, JavaScript, UI development, GraphQL, Django, and Vue.js would be convenient but can be learned during the project.
+* _Mentors:_ Santi Duenas, Eva Millán,  Miguel Ángel Fernández
+
+
+## Idea: Build Prototype Metric Display Options on CHAOSS Website
+
+[Micro-tasks and place for questions]( https://github.com/chaoss/website/issues/536 )
+
+CHAOSS metrics are released twice a year. The metrics are currently displayed on the website - sorted by the working group that defined them: [https://chaoss.community/metrics/](https://chaoss.community/metrics/)
+
+As more metrics are defined, the need for alternative display and categorization options is necessary to reduce the burden on the user to visualize the CHAOSS metrics in meaningful ways. See open issue 466 (https://github.com/chaoss/website/issues/466). Work on this project would require the student to work with the community to come up with different display and categorization options for CHAOSS metrics. For example, the CHAOSS project currently has initiatives around D&I Badging and Community Health reports. The metrics associated with these initiatives are one way that CHAOSS metrics may be categorized and displayed.
+
+The aims of the project are as follows:
+* Research and ideate different metric display options and categorizations
+* Build prototype navigation menus that allow the website visitors to explore different categories of metrics.
+* Build prototype metrics web pages to display different metric categories.
+* Suggest a workflow to publish metrics from the working groups in this new website design.
+
+The aims will require working with front end web development technologies and WordPress to build prototype navigation and metrics page displays.
+
+* _Difficulty:_ Low
+* _Requirements:_ Interest in front-end web development
+* _Recommended:_ Experience with HTML, CSS, JavaScript, and GitHub Markdown
+* _Mentors:_ Kevin Lumbard,  Matt Germonprez, and Jaskirat Singh
+
+
+## Idea: Automate Metrics Release and Process Improvement
+
+[Micro-tasks and place for questions]( https://github.com/chaoss/website/issues/537 )
+
+CHAOSS metrics are released twice a year. The metrics are currently displayed on the website - sorted by the working group that captured and defined them: [https://chaoss.community/metrics/](https://chaoss.community/metrics/)
+
+The official CHAOSS Metrics Release is captured in pdf form at the time of the release by printing each metric page as a PDF and combining them manually. The workflow is described in our handbook. The website pulls in the metrics from Markdown files in the working group GitHub repositories. It would be great if the PDF could be automatically generated from the Markdown files without having to manually PDF print the website pages.
+
+The aims of the project are as follows:  
+* Analyze the metrics release process and propose process improvements.  
+* Automate the creation of the metrics release PDF from Github Markdown files (Separate PDFs for English and translations).  
+
+The aims will require working in a programming language to automate the task. We are open to suggestions about how to achieve this because we do not have any pre-existing automation in place.
+
+* _Difficulty:_ Medium
+* _Requirements:_ GitHub, git, Markdown, PDF, automation experience
+* _Recommended:_ Prior experience with automatic PDF document generation
+* _Mentors:_ Kevin Lumbard,  Matt Germonprez, Georg Link
+
 
